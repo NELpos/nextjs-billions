@@ -2,6 +2,18 @@ import { API_URL } from "@/app/constants";
 import Image from "next/image";
 import FinancialAsset from "./financial-asset";
 
+interface financialAssetProps {
+    exchange: string,
+    ticker: string,
+    companyName: string,
+    numberOfShares: number,
+    sharePrice: number,
+    currencyCode: string,
+    exchangeRate: number,
+    interactive: boolean,
+    currentPrice: number
+}
+
 async function getPerson(id: string) {
     const target_url = `${API_URL}/person/${id}`
     const response = await fetch(target_url);
@@ -130,7 +142,7 @@ export default async function PersonInfo({ id }: { id: string }) {
                 <div className="p-5">
                   <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Financial Assets</h5>
                   <div className="grid grid-cols-3">
-                        {person?.financialAssets.map((financialAsset, index) => (
+                        {person?.financialAssets.map((financialAsset: financialAssetProps, index:number) => (
                             <FinancialAsset key={index} assets={financialAsset} />
                         ))}
                   </div>

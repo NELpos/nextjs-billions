@@ -8,12 +8,20 @@ async function getBillions() {
   return json
 }
 
+interface billionProps {
+  id : string,
+  name : string,
+  squareImage : string,
+  netWorth : number,
+  industries : string[]
+}
+
 export default async function Home() {
   const billions = await getBillions();
   return (
     <div className="bg-neutral-700 flex flex-col items-center justify-between min-h-screen p-6">
       <div className=" grid grid-cols-4 gap-4">
-        {billions.map((billion) => (
+        {billions.map((billion:billionProps) => (
           <Person key={billion.id} id={billion.id} name={billion.name} squareImage={billion.squareImage} netWorth={billion.netWorth} industries={billion.industries}  />
           ))}
       </div>
